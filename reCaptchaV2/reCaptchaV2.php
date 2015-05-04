@@ -130,7 +130,10 @@ class ReCaptchaV2 {
 
 			$this->valid = $response->success;
 			if (!$this->valid) {
-				$this->lastErrors = $response->{"error-codes"};
+				$errorCodes = $response->{"error-codes"};
+				foreach($errorCodes as $errCode) {
+					$this->lastErrors[$errCode] = $this->strings[$errCode];
+				}
 			}
 		}
 		return $this->valid;
@@ -140,12 +143,17 @@ class ReCaptchaV2 {
 		return $this->lastErrors;
 	}
 	
+	public function getLastErrorCodes() {
+		return array_keys($this->lastErrors);
+	}
+	
+	public function getLastErrorDescriptions() {
+		return array_values($this->lastErrors);
+	}
+	
 	public function getlastErrorsAsString() {
 		if (is_array($this->lastErrors)) {
-			foreach($this->lastErrors as $errors) {
-				$errStrings[] = $this->strings[$errors];
-			}
-			return implode("; ", $errStrings);
+			return implode("; ", $this->getLastErrorDescriptions());
 		}
 		return "";
 	}	
