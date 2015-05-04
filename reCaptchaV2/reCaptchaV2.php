@@ -25,10 +25,10 @@ class ReCaptchaV2 {
 	private $theme;
 	private $type;
 	private $lang;
-	private $includeNoScript = false;
+	private $includeNoScript;
 	private $strings;
 	
-	public function __construct ($siteKey, $secretKey, $theme = NULL, $type = NULL, $lang = "en", $includeNoScript = false) {
+	public function __construct ($siteKey, $secretKey, $theme = "light", $type = "image", $lang = "en", $includeNoScript = false) {
 		$this->setLang($lang);
 		
 		if (empty($siteKey) || empty($secretKey)) {
@@ -76,6 +76,10 @@ class ReCaptchaV2 {
 		return $this;
 	}
 	
+	public function getScript() {
+		return '<script type="text/javascript" src="' . self::API_URL . '.js" async="async" defer="defer"></script>';
+	}
+	
 	public function getWidget() {
 		$wHTML = '<div class="g-recaptcha" data-sitekey="' . $this->siteKey . '"';
 		
@@ -94,17 +98,10 @@ class ReCaptchaV2 {
   <div style="width: 302px; height: 352px;">
     <div style="width: 302px; height: 352px; position: relative;">
       <div style="width: 302px; height: 352px; position: absolute;">
-        <iframe src="https://www.google.com/recaptcha/api/fallback?k=' . $this->siteKey . '"
-                frameborder="0" scrolling="no"
-                style="width: 302px; height:352px; border-style: none;">
-        </iframe>
+        <iframe src="' . self::API_URL . '/fallback?k=' . $this->siteKey . '" frameborder="0" scrolling="no" style="width: 302px; height:352px; border-style: none;"></iframe>
       </div>
-      <div style="width: 250px; height: 80px; position: absolute; border-style: none;
-                  bottom: 21px; left: 25px; margin: 0px; padding: 0px; right: 25px;">
-        <textarea id="g-recaptcha-response" name="g-recaptcha-response"
-                  class="g-recaptcha-response"
-                  style="width: 250px; height: 80px; border: 1px solid #c1c1c1;
-                         margin: 0px; padding: 0px; resize: none;" value="">
+      <div style="width: 250px; height: 80px; position: absolute; border-style: none; bottom: 21px; left: 25px; margin: 0px; padding: 0px; right: 25px;">
+        <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 80px; border: 1px solid #c1c1c1; margin: 0px; padding: 0px; resize: none;" value="">
         </textarea>
       </div>
     </div>
