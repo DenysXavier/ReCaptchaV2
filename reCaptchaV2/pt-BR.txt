@@ -1,7 +1,7 @@
 ﻿; language file
 ; PORTUGUÊS (BRASIL)
 
-ctor = "Ambas as chaves devem estar presentes."
+ctor_missing_keys = "Ambas as chaves devem estar presentes."
 missing-input-secret = "O parâmetro secreto está ausente."
 invalid-input-secret = "O parâmetro secreto está inválido ou mal formatado."
 missing-input-response = "O parâmetro de resposta está ausente."

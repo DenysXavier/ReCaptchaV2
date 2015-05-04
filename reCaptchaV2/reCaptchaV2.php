@@ -14,25 +14,25 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+require_once ("reCaptchaV2I18n.php");
 
-class ReCaptchaV2 {
+class ReCaptchaV2 {	
 	const API_URL = "https://www.google.com/recaptcha/api";
-	
-	private $siteKey;
-	private $secretKey;
-	private $valid = NULL;
+
+	private $i18n;
+	private $includeNoScript;
 	private $lastErrors = NULL;
+	private $secretKey;
+	private $siteKey;
 	private $theme;
 	private $type;
-	private $lang;
-	private $includeNoScript;
-	private $strings;
-	
-	public function __construct ($siteKey, $secretKey, $theme = "light", $type = "image", $lang = "en", $includeNoScript = false) {
-		$this->setLang($lang);
+	private $valid = NULL;
+
+	public function __construct ($siteKey, $secretKey, $theme = "light", $type = "image", $lang = NULL, $includeNoScript = false) {
+		$this->i18n = new ReCaptchaV2I18n($lang);
 		
 		if (empty($siteKey) || empty($secretKey)) {
-			throw new InvalidArgumentException($this->strings["ctor"]);
+			throw new InvalidArgumentException($this->i18n->getString("ctor_missing_keys"));
 		} else {
 			$this->siteKey = $siteKey;
 			$this->secretKey = $secretKey;
@@ -40,44 +40,51 @@ class ReCaptchaV2 {
 			$this->type = $type;
 		}
 	}
+
+	public function getLang() {
+		return $this->i18n->getLang();
+	}
+
+	public function getLastErrors() {
+		return $this->lastErrors;
+	}
+
+	public function getLastErrorsAsString() {
+		if (is_array($this->lastErrors)) {
+			return implode("; ", $this->getLastErrorDescriptions());
+		}
+		return "";
+	}
 	
+	public function getLastErrorCodes() {
+		return array_keys($this->lastErrors);
+	}
+
+	public function getLastErrorDescriptions() {
+		return array_values($this->lastErrors);
+	}
+
+	public function getScript() {
+		$jsURL = self::API_URL . ".js";
+		$urlVars = array();
+		
+		if (!is_null($this->i18n->getLang())) {
+			$urlVars["hl"] = $this->i18n->getLang();
+		}
+		
+		if (count($urlVars) > 0) {
+			$jsURL .= "?" . http_build_query($urlVars);		
+		}
+		
+		return '<script src="' . $jsURL . '" type="text/javascript" async="async" defer="defer"></script>';
+	}
+
 	public function getTheme() {
 		return $this->theme;
 	}
 	
-	public function setTheme($theme) {
-		$this->theme = $theme;
-		return $this;
-	}
-	
 	public function getType() {
 		return $this->type;
-	}
-	
-	public function setType($type) {
-		$this->type = $type;
-		return $this;
-	}
-	
-	public function getLang() {
-		return $this->lang;
-	}
-	
-	public function setLang($lang) {
-		if ($this->lang != $lang){
-			if (file_exists(__DIR__ . DIRECTORY_SEPARATOR . $lang . ".txt")) {
-				$this->lang = $lang;
-				$this->strings = parse_ini_file($lang . ".txt");
-			} else {
-				$this->lang = "en";
-				$this->strings = parse_ini_file("en.txt");
-			}
-		}
-		return $this;
-	}
-	
-	public function getScript() {
-		return '<script type="text/javascript" src="' . self::API_URL . '.js" async="async" defer="defer"></script>';
 	}
 	
 	public function getWidget() {
@@ -132,30 +139,25 @@ class ReCaptchaV2 {
 			if (!$this->valid) {
 				$errorCodes = $response->{"error-codes"};
 				foreach($errorCodes as $errCode) {
-					$this->lastErrors[$errCode] = $this->strings[$errCode];
+					$this->lastErrors[$errCode] = $this->i18n->getString($errCode);
 				}
 			}
 		}
 		return $this->valid;
 	}
-	
-	public function getlastErrors() {
-		return $this->lastErrors;
+
+	public function setLang($lang) {		
+		return $this->i18n->setLang($lang);
 	}
-	
-	public function getLastErrorCodes() {
-		return array_keys($this->lastErrors);
+
+	public function setTheme($theme) {
+		$this->theme = $theme;
+		return $this;
 	}
-	
-	public function getLastErrorDescriptions() {
-		return array_values($this->lastErrors);
+
+	public function setType($type) {
+		$this->type = $type;
+		return $this;
 	}
-	
-	public function getlastErrorsAsString() {
-		if (is_array($this->lastErrors)) {
-			return implode("; ", $this->getLastErrorDescriptions());
-		}
-		return "";
-	}	
 }
 ?>
