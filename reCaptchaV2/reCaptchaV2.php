@@ -49,14 +49,14 @@ class ReCaptchaV2 {
 	/**
 	* Creates a new instance of ReCaptchaV2.
 	*
-	* @param string $siteKey
-	* @param string $secretKey
-	* @param string $theme
-	* @param string $type
-	* @param string $lang
-	* @param bool $includeNoScript 
+	* @param string $siteKey Site key (or public key) provided by Google.
+	* @param string $secretKey Secret key (or private key) provided by Google.
+	* @param string $theme Theme to be used by the widget.
+	* @param string $type Widget type to be used.
+	* @param string $lang Language code to be used for internationalization.
+	* @param bool $includeNoScript Indicates whether or not including noscript tag along with the widget tag.
 	*
-	* @return self
+	* @return new
 	*
 	* @throws InvalidArgumentException If any key is not provided.
 	*/
