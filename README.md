@@ -2,6 +2,8 @@
 
 **ReCaptchaV2** is a PHP implementation of Google ReCaptcha API version 2. It is intended to wrap the new Google ReCaptcha API into a simple class that provides ways to get the "No Captcha Widget" and easily validate the browser response.
 
+Further information on [ReCaptchaV2 Website](http://recaptchav2.com).
+
 ## What is a Captcha?
 
 A *CAPTCHA* (an acronym for "**C**ompletely **A**utomated **P**ublic **T**uring test to tell **C**omputers and **H**umans **A**part") is a type of challenge-response test used in computing to determine whether or not the user is human.
