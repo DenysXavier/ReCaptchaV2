@@ -22,7 +22,7 @@ require_once ("reCaptchaV2I18n.php");
 * Takes care of the widget rendering, its validation and treats any error replied by Google reCAPTCHA.
 *
 * @author Denys W. Xavier
-* @version 1.0.0
+* @version 1.1.0
 * @license Apache License 2.0
 */
 class ReCaptchaV2 {
@@ -234,6 +234,18 @@ class ReCaptchaV2 {
 		return $this->valid;
 	}
 
+	/**
+	* Sets whether or not including noscript tag along with the widget tag.
+	*
+	* @param bool $includeNoScript Whether or not including noscript tag along with the widget tag.
+	*
+	* @return self
+	*/
+	public function setIncludeNoScript($includeNoScript) {
+		$this->includeNoScript = $includeNoScript;
+		return $this;
+	}
+	
 	/**
 	* Sets the language to be used for internationalization.
 	*
