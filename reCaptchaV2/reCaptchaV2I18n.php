@@ -101,9 +101,9 @@ class ReCaptchaV2I18n {
 	public function setLang($lang = NULL) {
 		/* if no language code is informed, then, automatically try to figure out the best option for ReCaptchaV2 internationalization */
 		if (is_null($lang)) {
-			$acceptedLangs = explode(";", $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+			$acceptedLangs = explode(",", $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
 			foreach($acceptedLangs as $acceptedLang) {
-				$token = strtok($acceptedLang, ",");
+				$token = strtok($acceptedLang, ";");
 				if (in_array($token, self::$translatedLanguages)) {
 					$stringsLang = $token;
 					break;
