@@ -21,7 +21,7 @@
 * This class uses files named after language codes containing keys to refer to specific strings used by ReCaptchaV2 and Google reCAPTCHA.
 *
 * @author Denys W. Xavier
-* @version 1.0.0
+* @version 1.0.3
 * @license Apache License 2.0
 */
 class ReCaptchaV2I18n {
@@ -99,6 +99,9 @@ class ReCaptchaV2I18n {
 	* @return self
 	*/
 	public function setLang($lang = NULL) {
+		/* When no suitable option is to be found, then, set $stringsLang to "en" as default */
+		$stringsLang = "en";
+			
 		/* if no language code is informed, then, automatically try to figure out the best option for ReCaptchaV2 internationalization */
 		if (is_null($lang)) {
 			$acceptedLangs = explode(",", $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
@@ -111,9 +114,6 @@ class ReCaptchaV2I18n {
 			}
 		} else if (in_array($lang, self::$translatedLanguages)) {
 			$stringsLang = $lang;
-		} else {
-			/* If no suitable option was found, then, set $stringsLang to "en" as default */
-			$stringsLang = "en";
 		}
 		
 		$this->lang = $lang;
