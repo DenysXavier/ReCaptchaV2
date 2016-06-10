@@ -17,9 +17,9 @@
             "email": "dns.tramp@gmail.com"
         }
     ],
-	"autoload": {
+    "autoload": {
         "psr-4": {
-            "TIExpert\\": "src/"
+            "TIExpert\\ReCaptchaV2\\": "src/"
         }
     }
 }
