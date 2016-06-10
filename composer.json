@@ -16,5 +16,10 @@
             "name": "Denys Xavier",
             "email": "dns.tramp@gmail.com"
         }
-    ]
+    ],
+	"autoload": {
+        "psr-4": {
+            "TIExpert\\": "src/"
+        }
+    }
 }
