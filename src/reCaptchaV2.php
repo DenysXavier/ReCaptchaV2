@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
 *                  Copyright 2015 Denys W. Xavier
 *
@@ -14,7 +14,10 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-require_once ("reCaptchaV2I18n.php");
+
+namespace TIExpert\ReCaptchaV2;
+
+use TIExpert\ReCaptchaV2\ReCaptchaV2I18n;
 
 /**
 * The main class of ReCaptchaV2 library.

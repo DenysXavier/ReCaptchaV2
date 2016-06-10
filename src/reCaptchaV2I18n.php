@@ -15,6 +15,8 @@
 *   limitations under the License.
 */
 
+namespace TIExpert\ReCaptchaV2;
+
 /**
 * Class that implements internationalization for ReCaptchaV2.
 *
