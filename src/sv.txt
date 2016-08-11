@@ -1,0 +1,8 @@
+; language file
+; SWEDISH
+
+ctor_missing_keys = "Båda nycklarna måste finnas."
+missing-input-secret = "Den hemliga parametern saknas."
+invalid-input-secret = "Den hemliga parametern är felaktig eller har ogiltigt format."
+missing-input-response = "Svarsparametern saknas."
+invalid-input-response = "Svarsparametern är felaktig eller har ogiltigt format."

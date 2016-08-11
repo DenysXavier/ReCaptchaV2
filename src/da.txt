@@ -1,0 +1,8 @@
+; language file
+; DANISH
+
+ctor_missing_keys = "Begge nøgler skal være."
+missing-input-secret = "Den hemmlige parameter mangler."
+invalid-input-secret = "Den hemmliga parameter er forkert eller ugyldigt format."
+missing-input-response = "Svar parameter mangler."
+invalid-input-response = "Svar parameter er forkert eller ugyldigt format."
