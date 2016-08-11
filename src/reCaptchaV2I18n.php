@@ -30,7 +30,7 @@ class ReCaptchaV2I18n {
 	/** @var array $availableLanguages List of available languages for Google reCAPTCHA. */
 	private static $availableLanguages = array ("ar", "bg", "ca", "zh-CN", "zh-TW", "hr", "cs", "da", "nl", "en-GB", "en", "fil", "fi", "fr", "fr-CA", "de", "de-AT", "de-CH", "el", "iw", "hi", "hu", "id", "it", "ja", "ko", "lv", "lt", "no", "fa", "pl", "pt", "pt-BR", "pt-PT", "ro", "ru", "sr", "sk", "sl", "es", "es-419", "sv", "th", "tr", "uk", "vi");
 	/** @var array $translatedLanguages List of languages that ReCaptchaV2 has already been translated into. */
-	private static $translatedLanguages = array("en", "pt-BR");
+	private static $translatedLanguages = array("en", "da", "pt-BR", "sv");
 	
 	/** @var string $lang Language code being used for Google reCAPTCHA. */
 	private $lang;
